@@ -220,6 +220,126 @@
             justify-content: center;
             align-items: center;
         }
+
+        @media (max-width: 768px) {
+            .title {
+                font-size: 1.5rem;
+                letter-spacing: 5px;
+            }
+
+            .taiji-wrapper {
+                width: 350px;
+                height: 350px;
+            }
+
+            .taiji {
+                width: 200px;
+                height: 200px;
+            }
+
+            .taiji::before {
+                border-radius: 100px 0 0 100px;
+            }
+
+            .taiji::after {
+                border-radius: 0 100px 100px 0;
+            }
+
+            .glow-ring {
+                width: 220px;
+                height: 220px;
+            }
+
+            .outer-ring {
+                width: 330px;
+                height: 330px;
+            }
+
+            .yao {
+                width: 30px;
+                height: 6px;
+            }
+
+            .yao.yin::before,
+            .yao.yin::after {
+                width: 12px;
+                height: 6px;
+            }
+
+            .trigram {
+                width: 40px;
+                gap: 3px;
+            }
+
+            .trigram.qian { top: 5px; }
+            .trigram.dui { top: 50px; right: 55px; }
+            .trigram.li { left: 5px; }
+            .trigram.zhen { bottom: 50px; right: 55px; }
+            .trigram.kun { bottom: 5px; }
+            .trigram.gen { bottom: 50px; left: 55px; }
+            .trigram.kan { right: 5px; }
+            .trigram.xun { top: 50px; left: 55px; }
+        }
+
+        @media (max-width: 480px) {
+            .title {
+                font-size: 1.2rem;
+                letter-spacing: 3px;
+            }
+
+            .taiji-wrapper {
+                width: 280px;
+                height: 280px;
+            }
+
+            .taiji {
+                width: 160px;
+                height: 160px;
+            }
+
+            .taiji::before {
+                border-radius: 80px 0 0 80px;
+            }
+
+            .taiji::after {
+                border-radius: 0 80px 80px 0;
+            }
+
+            .glow-ring {
+                width: 170px;
+                height: 170px;
+            }
+
+            .outer-ring {
+                width: 260px;
+                height: 260px;
+            }
+
+            .yao {
+                width: 24px;
+                height: 5px;
+            }
+
+            .yao.yin::before,
+            .yao.yin::after {
+                width: 10px;
+                height: 5px;
+            }
+
+            .trigram {
+                width: 30px;
+                gap: 2px;
+            }
+
+            .trigram.qian { top: 3px; }
+            .trigram.dui { top: 40px; right: 45px; }
+            .trigram.li { left: 3px; }
+            .trigram.zhen { bottom: 40px; right: 45px; }
+            .trigram.kun { bottom: 3px; }
+            .trigram.gen { bottom: 40px; left: 45px; }
+            .trigram.kan { right: 3px; }
+            .trigram.xun { top: 40px; left: 45px; }
+        }
     </style>
 </head>
 <body>
@@ -275,14 +395,28 @@
                 </div>
             </div>
             <div class="glow-ring"></div>
-            <a href="journey.html" class="taiji-link">
-                <div class="taiji">
-                    <div class="yin-yang"></div>
-                    <div class="dot dot-white"></div>
-                    <div class="dot dot-black"></div>
-                </div>
-            </a>
+            <div class="taiji-link" style="cursor: pointer;">
+            <div class="taiji">
+                <div class="yin-yang"></div>
+                <div class="dot dot-white"></div>
+                <div class="dot dot-black"></div>
+            </div>
+        </div>
         </div>
     </div>
+    <script>
+        console.log('页面加载完成，4秒后自动跳转...');
+        
+        const taijiLink = document.querySelector('.taiji-link');
+        taijiLink.addEventListener('click', () => {
+            console.log('用户点击了太极图，立即跳转');
+            window.location.href = 'journey.html';
+        });
+        
+        setTimeout(() => {
+            console.log('开始跳转到 journey.html');
+            window.location.href = 'journey.html';
+        }, 4000);
+    </script>
 </body>
 </html>

@@ -812,6 +812,204 @@
             border-color: rgba(255, 255, 255, 0.5);
             color: rgba(255, 255, 255, 1);
         }
+
+        @media (max-width: 768px) {
+            .phase-text {
+                font-size: 1.5rem;
+                letter-spacing: 8px;
+            }
+
+            .wuji-container,
+            .taiji-container {
+                width: 300px;
+                height: 300px;
+            }
+
+            .taiji {
+                width: 200px;
+                height: 200px;
+            }
+
+            .taiji::before {
+                border-radius: 100px 0 0 100px;
+            }
+
+            .taiji::after {
+                border-radius: 0 100px 100px 0;
+            }
+
+            .blackhole {
+                width: 150px;
+                height: 150px;
+            }
+
+            .accretion-disk {
+                width: 250px;
+                height: 250px;
+            }
+
+            .accretion-disk-outer {
+                width: 320px;
+                height: 320px;
+            }
+
+            .liangyi-container,
+            .sixiang-container,
+            .bagua-container {
+                width: 500px;
+                height: 500px;
+            }
+
+            .sun,
+            .moon {
+                width: 90px;
+                height: 90px;
+            }
+
+            .yao {
+                width: 80px;
+                height: 16px;
+            }
+
+            .liushisigua-grid {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 6px;
+                max-width: 600px;
+                padding: 15px;
+            }
+
+            .guagua-item {
+                padding: 5px;
+                border-radius: 4px;
+            }
+
+            .guagua-yaos {
+                gap: 2px;
+                margin-bottom: 4px;
+            }
+
+            .guagua-yao {
+                width: 28px;
+                height: 5px;
+            }
+
+            .guagua-yao.yin::before,
+            .guagua-yao.yin::after {
+                width: 11px;
+                height: 5px;
+            }
+
+            .guagua-name {
+                font-size: 0.7rem;
+                letter-spacing: 1px;
+            }
+
+            .nav-btn {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .phase-text {
+                font-size: 1.2rem;
+                letter-spacing: 5px;
+            }
+
+            .wuji-container,
+            .taiji-container {
+                width: 250px;
+                height: 250px;
+            }
+
+            .taiji {
+                width: 160px;
+                height: 160px;
+            }
+
+            .taiji::before {
+                border-radius: 80px 0 0 80px;
+            }
+
+            .taiji::after {
+                border-radius: 0 80px 80px 0;
+            }
+
+            .blackhole {
+                width: 120px;
+                height: 120px;
+            }
+
+            .accretion-disk {
+                width: 200px;
+                height: 200px;
+            }
+
+            .accretion-disk-outer {
+                width: 260px;
+                height: 260px;
+            }
+
+            .liangyi-container,
+            .sixiang-container,
+            .bagua-container {
+                width: 400px;
+                height: 400px;
+            }
+
+            .sun,
+            .moon {
+                width: 70px;
+                height: 70px;
+            }
+
+            .yao {
+                width: 60px;
+                height: 12px;
+            }
+
+            .liushisigua-grid {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 4px;
+                max-width: 400px;
+                padding: 10px;
+            }
+
+            .guagua-item {
+                padding: 4px;
+                border-radius: 3px;
+            }
+
+            .guagua-yaos {
+                gap: 2px;
+                margin-bottom: 3px;
+            }
+
+            .guagua-yao {
+                width: 22px;
+                height: 4px;
+            }
+
+            .guagua-yao.yin::before,
+            .guagua-yao.yin::after {
+                width: 9px;
+                height: 4px;
+            }
+
+            .guagua-name {
+                font-size: 0.6rem;
+                letter-spacing: 1px;
+            }
+
+            .nav-btns {
+                gap: 10px;
+            }
+
+            .nav-btn {
+                padding: 8px 15px;
+                font-size: 0.8rem;
+            }
+        }
     </style>
 </head>
 <body>
