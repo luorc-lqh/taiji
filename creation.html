@@ -171,6 +171,34 @@
             z-index: 0;
         }
 
+        .white-ring {
+            position: absolute;
+            width: 380px;
+            height: 380px;
+            border-radius: 50%;
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 
+                0 0 25px rgba(255, 255, 255, 0.3),
+                inset 0 0 25px rgba(255, 255, 255, 0.15);
+            z-index: 1;
+            animation: ring-pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes ring-pulse {
+            0%, 100% {
+                border-color: rgba(255, 255, 255, 0.4);
+                box-shadow: 
+                    0 0 25px rgba(255, 255, 255, 0.3),
+                    inset 0 0 25px rgba(255, 255, 255, 0.15);
+            }
+            50% {
+                border-color: rgba(255, 255, 255, 0.6);
+                box-shadow: 
+                    0 0 45px rgba(255, 255, 255, 0.4),
+                    inset 0 0 35px rgba(255, 255, 255, 0.2);
+            }
+        }
+
         @keyframes disk-spin-reverse {
             from {
                 transform: rotate(360deg);
@@ -814,15 +842,25 @@
         }
 
         @media (max-width: 768px) {
+            .text-container {
+                top: 5%;
+            }
+
             .phase-text {
-                font-size: 1.5rem;
-                letter-spacing: 8px;
+                font-size: 1.3rem;
+                letter-spacing: 6px;
+                white-space: nowrap;
             }
 
             .wuji-container,
             .taiji-container {
                 width: 300px;
                 height: 300px;
+            }
+
+            .white-ring {
+                width: 220px;
+                height: 220px;
             }
 
             .taiji {
@@ -854,10 +892,14 @@
             }
 
             .liangyi-container,
-            .sixiang-container,
-            .bagua-container {
+            .sixiang-container {
                 width: 500px;
                 height: 500px;
+            }
+
+            .bagua-container {
+                width: 450px;
+                height: 450px;
             }
 
             .sun,
@@ -871,37 +913,106 @@
                 height: 16px;
             }
 
+            .trigram {
+                gap: 5px;
+            }
+
+            .trigram-name {
+                font-size: 1.1rem;
+                letter-spacing: 4px;
+                margin-bottom: 6px;
+            }
+
+            .trigram-yao {
+                width: 50px;
+                height: 10px;
+            }
+
+            .trigram-yao.yin::before,
+            .trigram-yao.yin::after {
+                width: 20px;
+                height: 10px;
+            }
+
+            .trigram.qian {
+                top: 15px;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+
+            .trigram.dui {
+                top: 80px;
+                right: 65px;
+                transform: rotate(-45deg);
+            }
+
+            .trigram.li {
+                right: 15px;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+
+            .trigram.zhen {
+                bottom: 80px;
+                right: 65px;
+                transform: rotate(45deg);
+            }
+
+            .trigram.kun {
+                bottom: 15px;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+
+            .trigram.gen {
+                bottom: 80px;
+                left: 65px;
+                transform: rotate(-45deg);
+            }
+
+            .trigram.kan {
+                left: 15px;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+
+            .trigram.xun {
+                top: 80px;
+                left: 65px;
+                transform: rotate(45deg);
+            }
+
             .liushisigua-grid {
-                grid-template-columns: repeat(4, 1fr);
-                gap: 6px;
-                max-width: 600px;
-                padding: 15px;
+                grid-template-columns: repeat(8, 1fr);
+                gap: 4px;
+                max-width: 650px;
+                padding: 10px;
             }
 
             .guagua-item {
-                padding: 5px;
-                border-radius: 4px;
+                padding: 4px;
+                border-radius: 3px;
             }
 
             .guagua-yaos {
-                gap: 2px;
-                margin-bottom: 4px;
+                gap: 1px;
+                margin-bottom: 3px;
             }
 
             .guagua-yao {
-                width: 28px;
-                height: 5px;
+                width: 24px;
+                height: 4px;
             }
 
             .guagua-yao.yin::before,
             .guagua-yao.yin::after {
-                width: 11px;
-                height: 5px;
+                width: 10px;
+                height: 4px;
             }
 
             .guagua-name {
-                font-size: 0.7rem;
-                letter-spacing: 1px;
+                font-size: 0.6rem;
+                letter-spacing: 0px;
             }
 
             .nav-btn {
@@ -911,15 +1022,25 @@
         }
 
         @media (max-width: 480px) {
+            .text-container {
+                top: 3%;
+            }
+
             .phase-text {
-                font-size: 1.2rem;
-                letter-spacing: 5px;
+                font-size: 0.9rem;
+                letter-spacing: 3px;
+                white-space: nowrap;
             }
 
             .wuji-container,
             .taiji-container {
                 width: 250px;
                 height: 250px;
+            }
+
+            .white-ring {
+                width: 180px;
+                height: 180px;
             }
 
             .taiji {
@@ -951,58 +1072,197 @@
             }
 
             .liangyi-container,
-            .sixiang-container,
+            .sixiang-container {
+                width: 280px;
+                height: 280px;
+            }
+
             .bagua-container {
-                width: 400px;
-                height: 400px;
+                width: 320px;
+                height: 320px;
             }
 
             .sun,
             .moon {
-                width: 70px;
-                height: 70px;
+                width: 55px;
+                height: 55px;
+            }
+
+            .sun {
+                top: 20px;
+            }
+
+            .moon {
+                bottom: 20px;
             }
 
             .yao {
+                width: 50px;
+                height: 10px;
+            }
+
+            .yang-yao-container {
+                top: 85px;
+            }
+
+            .yin-yao-container {
+                bottom: 85px;
+            }
+
+            .yin-yao::before,
+            .yin-yao::after {
+                width: 20px;
+                height: 10px;
+            }
+
+            .label {
+                font-size: 1rem;
+                letter-spacing: 3px;
+            }
+
+            .xiang-name {
+                font-size: 1.1rem;
+                letter-spacing: 4px;
+                margin-bottom: 8px;
+            }
+
+            .xiang-yao {
                 width: 60px;
                 height: 12px;
             }
 
-            .liushisigua-grid {
-                grid-template-columns: repeat(4, 1fr);
+            .xiang-yao.yin::before,
+            .xiang-yao.yin::after {
+                width: 24px;
+                height: 12px;
+            }
+
+            .xiang-taiyang {
+                top: 30px;
+            }
+
+            .xiang-shaoyang {
+                right: 30px;
+            }
+
+            .xiang-taiyin {
+                bottom: 30px;
+            }
+
+            .xiang-shaoyin {
+                left: 30px;
+            }
+
+            .trigram {
                 gap: 4px;
-                max-width: 400px;
-                padding: 10px;
+            }
+
+            .trigram-name {
+                font-size: 0.9rem;
+                letter-spacing: 3px;
+                margin-bottom: 5px;
+            }
+
+            .trigram-yao {
+                width: 40px;
+                height: 8px;
+            }
+
+            .trigram-yao.yin::before,
+            .trigram-yao.yin::after {
+                width: 16px;
+                height: 8px;
+            }
+
+            .trigram.qian {
+                top: 10px;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+
+            .trigram.dui {
+                top: 60px;
+                right: 45px;
+                transform: rotate(-45deg);
+            }
+
+            .trigram.li {
+                right: 10px;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+
+            .trigram.zhen {
+                bottom: 60px;
+                right: 45px;
+                transform: rotate(45deg);
+            }
+
+            .trigram.kun {
+                bottom: 10px;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+
+            .trigram.gen {
+                bottom: 60px;
+                left: 45px;
+                transform: rotate(-45deg);
+            }
+
+            .trigram.kan {
+                left: 10px;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+
+            .trigram.xun {
+                top: 60px;
+                left: 45px;
+                transform: rotate(45deg);
+            }
+
+            .liushisigua-container {
+                padding-top: 60px;
+                align-items: flex-start;
+            }
+
+            .liushisigua-grid {
+                grid-template-columns: repeat(8, 1fr);
+                gap: 2px;
+                max-width: 360px;
+                padding: 3px;
             }
 
             .guagua-item {
-                padding: 4px;
-                border-radius: 3px;
+                padding: 2px;
+                border-radius: 2px;
             }
 
             .guagua-yaos {
-                gap: 2px;
-                margin-bottom: 3px;
+                gap: 1px;
+                margin-bottom: 1px;
             }
 
             .guagua-yao {
-                width: 22px;
-                height: 4px;
+                width: 16px;
+                height: 2px;
             }
 
             .guagua-yao.yin::before,
             .guagua-yao.yin::after {
-                width: 9px;
-                height: 4px;
+                width: 6px;
+                height: 2px;
             }
 
             .guagua-name {
-                font-size: 0.6rem;
-                letter-spacing: 1px;
+                font-size: 0.45rem;
+                letter-spacing: 0px;
             }
 
             .nav-btns {
                 gap: 10px;
+                bottom: 3%;
             }
 
             .nav-btn {
@@ -1021,6 +1281,7 @@
         </div>
 
         <div class="wuji-container" id="wujiContainer">
+            <div class="white-ring"></div>
             <div class="accretion-disk-outer"></div>
             <div class="accretion-disk"></div>
             <div class="blackhole" id="blackhole"></div>
@@ -1384,7 +1645,7 @@
                         createLiushisiguaParticles();
                         createLiushisiguaGrid();
                         setTimeout(() => {
-                            updatePhaseText('八经卦一重叠来到人间 统摄世间万象');
+                            updatePhaseText('八经卦重叠来到了人间 统摄世间万象');
                             const navBtns = document.getElementById('navBtns');
                             navBtns.style.opacity = '0';
                             navBtns.style.transition = 'opacity 1s ease-out';
