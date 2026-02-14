@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>太极图动画</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            overflow: hidden;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .taiji-wrapper {
+            position: relative;
+            width: 500px;
+            height: 500px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .bagua {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        .trigram {
+            position: absolute;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+            width: 50px;
+        }
+
+        .trigram.qian { top: 10px; left: 50%; transform: translateX(-50%) rotate(180deg); }
+        .trigram.dui { top: 72px; right: 77px; transform: rotate(-135deg); }
+        .trigram.li { left: 10px; top: 50%; transform: translateY(-50%) rotate(90deg); }
+        .trigram.zhen { bottom: 72px; right: 77px; transform: rotate(-45deg); }
+        .trigram.kun { bottom: 10px; left: 50%; transform: translateX(-50%); }
+        .trigram.gen { bottom: 72px; left: 77px; transform: rotate(45deg); }
+        .trigram.kan { right: 10px; top: 50%; transform: translateY(-50%) rotate(-90deg); }
+        .trigram.xun { top: 72px; left: 77px; transform: rotate(135deg); }
+
+        .yao {
+            width: 40px;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 2px;
+        }
+
+        .yao.yin {
+            display: flex;
+            justify-content: space-between;
+            background: transparent;
+        }
+
+        .yao.yin::before,
+        .yao.yin::after {
+            content: '';
+            width: 16px;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 2px;
+        }
+
+        .taiji {
+            width: 280px;
+            height: 280px;
+            border-radius: 50%;
+            position: relative;
+            animation: rotate-reverse 8s linear infinite;
+            box-shadow: 
+                0 0 60px rgba(255, 255, 255, 0.3),
+                0 0 100px rgba(255, 255, 255, 0.1);
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .taiji:hover {
+            transform: scale(1.05);
+            box-shadow: 
+                0 0 80px rgba(255, 255, 255, 0.5),
+                0 0 120px rgba(255, 255, 255, 0.3);
+        }
+
+        .taiji::before,
+        .taiji::after {
+            content: '';
+            position: absolute;
+            width: 50%;
+            height: 100%;
+            top: 0;
+        }
+
+        .taiji::before {
+            left: 0;
+            background: #fff;
+            border-radius: 140px 0 0 140px;
+        }
+
+        .taiji::after {
+            right: 0;
+            background: #000;
+            border-radius: 0 140px 140px 0;
+        }
+
+        .yin-yang {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .yin-yang::before,
+        .yin-yang::after {
+            content: '';
+            position: absolute;
+            width: 50%;
+            height: 50%;
+            left: 25%;
+            border-radius: 50%;
+        }
+
+        .yin-yang::before {
+            top: 0;
+            background: #000;
+        }
+
+        .yin-yang::after {
+            bottom: 0;
+            background: #fff;
+        }
+
+        .dot {
+            position: absolute;
+            width: 15%;
+            height: 15%;
+            left: 42.5%;
+            border-radius: 50%;
+            z-index: 2;
+        }
+
+        .dot-white {
+            top: 14.5%;
+            background: #fff;
+        }
+
+        .dot-black {
+            bottom: 14.5%;
+            background: #000;
+        }
+
+        @keyframes rotate-reverse {
+            from {
+                transform: rotate(360deg);
+            }
+            to {
+                transform: rotate(0deg);
+            }
+        }
+
+        .title {
+            color: #fff;
+            font-family: 'Microsoft YaHei', sans-serif;
+            font-size: 2rem;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+            letter-spacing: 10px;
+        }
+
+        .glow-ring {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 0.5;
+            }
+            50% {
+                transform: scale(1.1);
+                opacity: 0.2;
+            }
+        }
+
+        .outer-ring {
+            position: absolute;
+            width: 480px;
+            height: 480px;
+            border-radius: 50%;
+            border: 2px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .taiji-link {
+            text-decoration: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">太极八卦</h1>
+        <div class="taiji-wrapper">
+            <div class="outer-ring"></div>
+            <div class="bagua">
+                <div class="trigram qian">
+                    <div class="yao yang"></div>
+                    <div class="yao yang"></div>
+                    <div class="yao yang"></div>
+                </div>
+                <div class="trigram dui">
+                    <div class="yao yin"></div>
+                    <div class="yao yang"></div>
+                    <div class="yao yang"></div>
+                </div>
+                <div class="trigram li">
+                    <div class="yao yang"></div>
+                    <div class="yao yin"></div>
+                    <div class="yao yang"></div>
+                </div>
+                <div class="trigram zhen">
+                    <div class="yao yin"></div>
+                    <div class="yao yin"></div>
+                    <div class="yao yang"></div>
+                </div>
+                <div class="trigram kun">
+                    <div class="yao yin"></div>
+                    <div class="yao yin"></div>
+                    <div class="yao yin"></div>
+                </div>
+                <div class="trigram dui">
+                    <div class="yao yin"></div>
+                    <div class="yao yang"></div>
+                    <div class="yao yang"></div>
+                </div>
+                <div class="trigram kan">
+                    <div class="yao yin"></div>
+                    <div class="yao yang"></div>
+                    <div class="yao yin"></div>
+                </div>
+                <div class="trigram gen">
+                    <div class="yao yang"></div>
+                    <div class="yao yin"></div>
+                    <div class="yao yin"></div>
+                </div>
+                <div class="trigram xun">
+                    <div class="yao yang"></div>
+                    <div class="yao yang"></div>
+                    <div class="yao yin"></div>
+                </div>
+            </div>
+            <div class="glow-ring"></div>
+            <a href="journey.html" class="taiji-link">
+                <div class="taiji">
+                    <div class="yin-yang"></div>
+                    <div class="dot dot-white"></div>
+                    <div class="dot dot-black"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+</body>
+</html>
