@@ -1,0 +1,1228 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>无极生太极 太极生八卦</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            background: #000;
+            overflow: hidden;
+            font-family: 'Microsoft YaHei', serif;
+        }
+
+        .scene {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .chaos-particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .chaos-particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            animation: chaos-move 8s ease-in-out infinite;
+        }
+
+        @keyframes chaos-move {
+            0%, 100% {
+                transform: translate(0, 0) scale(1);
+                opacity: 0.2;
+            }
+            25% {
+                transform: translate(50px, -30px) scale(0.8);
+                opacity: 0.5;
+            }
+            50% {
+                transform: translate(-40px, 40px) scale(1.2);
+                opacity: 0.3;
+            }
+            75% {
+                transform: translate(-30px, -50px) scale(0.9);
+                opacity: 0.6;
+            }
+        }
+
+        .wuji-container {
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            animation: wuji-appear 2s ease-out 2s forwards;
+        }
+
+        @keyframes wuji-appear {
+            from {
+                opacity: 0;
+                transform: scale(0.5);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .blackhole {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: radial-gradient(circle, #000 0%, #000 30%, transparent 70%);
+            box-shadow: 
+                0 0 60px rgba(0, 0, 0, 1),
+                0 0 120px rgba(0, 0, 0, 0.8),
+                0 0 180px rgba(0, 0, 0, 0.6);
+            animation: blackhole-spin 10s linear infinite, blackhole-pulse 4s ease-in-out infinite;
+            z-index: 2;
+        }
+
+        @keyframes blackhole-spin {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes blackhole-pulse {
+            0%, 100% {
+                box-shadow: 
+                    0 0 60px rgba(0, 0, 0, 1),
+                    0 0 120px rgba(0, 0, 0, 0.8),
+                    0 0 180px rgba(0, 0, 0, 0.6);
+            }
+            50% {
+                box-shadow: 
+                    0 0 80px rgba(0, 0, 0, 1),
+                    0 0 160px rgba(0, 0, 0, 0.8),
+                    0 0 240px rgba(0, 0, 0, 0.6);
+            }
+        }
+
+        .accretion-disk {
+            position: absolute;
+            width: 350px;
+            height: 350px;
+            border-radius: 50%;
+            background: conic-gradient(
+                from 0deg,
+                transparent 0deg,
+                rgba(100, 80, 150, 0.3) 45deg,
+                rgba(150, 120, 200, 0.5) 90deg,
+                rgba(200, 180, 255, 0.3) 135deg,
+                transparent 180deg,
+                rgba(80, 60, 120, 0.3) 225deg,
+                rgba(120, 100, 180, 0.5) 270deg,
+                rgba(180, 150, 220, 0.3) 315deg,
+                transparent 360deg
+            );
+            animation: disk-spin 15s linear infinite;
+            filter: blur(15px);
+            z-index: 1;
+        }
+
+        @keyframes disk-spin {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .accretion-disk-outer {
+            position: absolute;
+            width: 450px;
+            height: 450px;
+            border-radius: 50%;
+            background: conic-gradient(
+                from 180deg,
+                transparent 0deg,
+                rgba(60, 40, 100, 0.2) 60deg,
+                rgba(100, 80, 150, 0.3) 120deg,
+                transparent 180deg,
+                rgba(50, 30, 80, 0.2) 240deg,
+                rgba(80, 60, 120, 0.3) 300deg,
+                transparent 360deg
+            );
+            animation: disk-spin-reverse 20s linear infinite;
+            filter: blur(20px);
+            z-index: 0;
+        }
+
+        @keyframes disk-spin-reverse {
+            from {
+                transform: rotate(360deg);
+            }
+            to {
+                transform: rotate(0deg);
+            }
+        }
+
+        .text-container {
+            position: absolute;
+            top: 8%;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            z-index: 10;
+        }
+
+        .phase-text {
+            font-size: 2rem;
+            color: rgba(255, 255, 255, 0.9);
+            text-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
+            letter-spacing: 15px;
+            opacity: 0;
+            animation: text-fade 2s ease-out forwards;
+        }
+
+        @keyframes text-fade {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .taiji-container {
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            z-index: 5;
+        }
+
+        .taiji {
+            width: 280px;
+            height: 280px;
+            border-radius: 50%;
+            position: relative;
+            box-shadow: 
+                0 0 60px rgba(255, 255, 255, 0.3),
+                0 0 100px rgba(255, 255, 255, 0.1);
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .taiji:hover {
+            transform: scale(1.05);
+            box-shadow: 
+                0 0 80px rgba(255, 255, 255, 0.5),
+                0 0 120px rgba(255, 255, 255, 0.3);
+        }
+
+        .taiji::before,
+        .taiji::after {
+            content: '';
+            position: absolute;
+            width: 50%;
+            height: 100%;
+            top: 0;
+        }
+
+        .taiji::before {
+            left: 0;
+            background: #fff;
+            border-radius: 140px 0 0 140px;
+        }
+
+        .taiji::after {
+            right: 0;
+            background: #000;
+            border-radius: 0 140px 140px 0;
+        }
+
+        .yin-yang {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .yin-yang::before,
+        .yin-yang::after {
+            content: '';
+            position: absolute;
+            width: 50%;
+            height: 50%;
+            left: 25%;
+            border-radius: 50%;
+        }
+
+        .yin-yang::before {
+            top: 0;
+            background: #000;
+        }
+
+        .yin-yang::after {
+            bottom: 0;
+            background: #fff;
+        }
+
+        .dot {
+            position: absolute;
+            width: 15%;
+            height: 15%;
+            left: 42.5%;
+            border-radius: 50%;
+            z-index: 2;
+        }
+
+        .dot-white {
+            top: 14.5%;
+            background: #fff;
+        }
+
+        .dot-black {
+            bottom: 14.5%;
+            background: #000;
+        }
+
+        .liangyi-container {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 6;
+        }
+
+        .sun-moon-wrapper {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .sun {
+            position: absolute;
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: radial-gradient(circle, #ffeb3b 0%, #ff9800 50%, #ff5722 100%);
+            box-shadow: 
+                0 0 40px rgba(255, 235, 59, 0.8),
+                0 0 80px rgba(255, 152, 0, 0.5),
+                0 0 120px rgba(255, 87, 34, 0.3);
+            top: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: sun-glow 3s ease-in-out infinite;
+        }
+
+        @keyframes sun-glow {
+            0%, 100% {
+                box-shadow: 
+                    0 0 40px rgba(255, 235, 59, 0.8),
+                    0 0 80px rgba(255, 152, 0, 0.5),
+                    0 0 120px rgba(255, 87, 34, 0.3);
+            }
+            50% {
+                box-shadow: 
+                    0 0 60px rgba(255, 235, 59, 1),
+                    0 0 100px rgba(255, 152, 0, 0.7),
+                    0 0 150px rgba(255, 87, 34, 0.5);
+            }
+        }
+
+        .moon {
+            position: absolute;
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: radial-gradient(circle, #f5f5f5 0%, #b0b0b0 50%, #78909c 100%);
+            box-shadow: 
+                0 0 40px rgba(245, 245, 245, 0.8),
+                0 0 80px rgba(176, 176, 176, 0.5),
+                0 0 120px rgba(120, 144, 156, 0.3);
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: moon-glow 3s ease-in-out infinite 1.5s;
+        }
+
+        @keyframes moon-glow {
+            0%, 100% {
+                box-shadow: 
+                    0 0 40px rgba(245, 245, 245, 0.8),
+                    0 0 80px rgba(176, 176, 176, 0.5),
+                    0 0 120px rgba(120, 144, 156, 0.3);
+            }
+            50% {
+                box-shadow: 
+                    0 0 60px rgba(245, 245, 245, 1),
+                    0 0 100px rgba(176, 176, 176, 0.7),
+                    0 0 150px rgba(120, 144, 156, 0.5);
+            }
+        }
+
+        .yao-container {
+            position: absolute;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .yang-yao-container {
+            top: 180px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .yin-yao-container {
+            bottom: 180px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .yao {
+            width: 100px;
+            height: 20px;
+            border-radius: 5px;
+        }
+
+        .yang-yao {
+            background: linear-gradient(90deg, #ffeb3b, #ff9800);
+            box-shadow: 0 0 20px rgba(255, 235, 59, 0.6);
+        }
+
+        .yin-yao {
+            display: flex;
+            justify-content: space-between;
+            background: transparent;
+        }
+
+        .yin-yao::before,
+        .yin-yao::after {
+            content: '';
+            width: 40px;
+            height: 20px;
+            background: linear-gradient(90deg, #f5f5f5, #b0b0b0);
+            border-radius: 5px;
+            box-shadow: 0 0 20px rgba(245, 245, 245, 0.6);
+        }
+
+        .label {
+            position: absolute;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1.2rem;
+            letter-spacing: 5px;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+
+        .label-sun {
+            top: 5px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(255, 235, 59, 0.9);
+        }
+
+        .label-moon {
+            bottom: 5px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(245, 245, 245, 0.9);
+        }
+
+        .sixiang-container {
+            position: absolute;
+            width: 700px;
+            height: 700px;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 7;
+        }
+
+        .sixiang-wrapper {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .xiang {
+            position: absolute;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .xiang-taiyang {
+            top: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .xiang-shaoyang {
+            right: 50px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .xiang-taiyin {
+            bottom: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .xiang-shaoyin {
+            left: 50px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .xiang-name {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.5rem;
+            letter-spacing: 8px;
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+            margin-bottom: 15px;
+        }
+
+        .xiang-taiyang .xiang-name {
+            color: rgba(255, 235, 59, 0.95);
+        }
+
+        .xiang-shaoyang .xiang-name {
+            color: rgba(255, 152, 0, 0.95);
+        }
+
+        .xiang-taiyin .xiang-name {
+            color: rgba(245, 245, 245, 0.95);
+        }
+
+        .xiang-shaoyin .xiang-name {
+            color: rgba(176, 176, 176, 0.95);
+        }
+
+        .xiang-yaos {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .xiang-yao {
+            width: 80px;
+            height: 16px;
+            border-radius: 4px;
+        }
+
+        .xiang-yao.yang {
+            background: linear-gradient(90deg, #ffeb3b, #ff9800);
+            box-shadow: 0 0 15px rgba(255, 235, 59, 0.5);
+        }
+
+        .xiang-yao.yin {
+            display: flex;
+            justify-content: space-between;
+            background: transparent;
+        }
+
+        .xiang-yao.yin::before,
+        .xiang-yao.yin::after {
+            content: '';
+            width: 32px;
+            height: 16px;
+            background: linear-gradient(90deg, #f5f5f5, #b0b0b0);
+            border-radius: 4px;
+            box-shadow: 0 0 15px rgba(245, 245, 245, 0.5);
+        }
+
+        .bagua-container {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 8;
+        }
+
+        .bagua-wrapper {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .trigram {
+            position: absolute;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .trigram-name {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.3rem;
+            letter-spacing: 6px;
+            text-shadow: 0 0 12px rgba(255, 255, 255, 0.5);
+            margin-bottom: 10px;
+        }
+
+        .trigram-yaos {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .trigram-yao {
+            width: 60px;
+            height: 12px;
+            border-radius: 3px;
+        }
+
+        .trigram-yao.yang {
+            background: linear-gradient(90deg, #ffeb3b, #ff9800);
+            box-shadow: 0 0 12px rgba(255, 235, 59, 0.4);
+        }
+
+        .trigram-yao.yin {
+            display: flex;
+            justify-content: space-between;
+            background: transparent;
+        }
+
+        .trigram-yao.yin::before,
+        .trigram-yao.yin::after {
+            content: '';
+            width: 24px;
+            height: 12px;
+            background: linear-gradient(90deg, #f5f5f5, #b0b0b0);
+            border-radius: 3px;
+            box-shadow: 0 0 12px rgba(245, 245, 245, 0.4);
+        }
+
+        .trigram.qian {
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .trigram.dui {
+            top: 100px;
+            right: 80px;
+            transform: rotate(-45deg);
+        }
+
+        .trigram.li {
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .trigram.zhen {
+            bottom: 100px;
+            right: 80px;
+            transform: rotate(45deg);
+        }
+
+        .trigram.kun {
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .trigram.gen {
+            bottom: 100px;
+            left: 80px;
+            transform: rotate(-45deg);
+        }
+
+        .trigram.kan {
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .trigram.xun {
+            top: 100px;
+            left: 80px;
+            transform: rotate(45deg);
+        }
+
+        .liushisigua-container {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 9;
+            overflow: hidden;
+        }
+
+        .liushisigua-grid {
+            display: grid;
+            grid-template-columns: repeat(8, 1fr);
+            gap: 8px;
+            max-width: 1000px;
+            padding: 10px;
+        }
+
+        .guagua-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 6px;
+            border-radius: 6px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .guagua-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 235, 59, 0.5);
+        }
+
+        .guagua-yaos {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+            margin-bottom: 5px;
+        }
+
+        .guagua-yao {
+            width: 35px;
+            height: 6px;
+            border-radius: 1px;
+        }
+
+        .guagua-yao.yang {
+            background: linear-gradient(90deg, #ffeb3b, #ff9800);
+            box-shadow: 0 0 5px rgba(255, 235, 59, 0.4);
+        }
+
+        .guagua-yao.yin {
+            display: flex;
+            justify-content: space-between;
+            background: transparent;
+        }
+
+        .guagua-yao.yin::before,
+        .guagua-yao.yin::after {
+            content: '';
+            width: 14px;
+            height: 6px;
+            background: linear-gradient(90deg, #f5f5f5, #b0b0b0);
+            border-radius: 1px;
+            box-shadow: 0 0 5px rgba(245, 245, 245, 0.4);
+        }
+
+        .guagua-name {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.9);
+            text-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
+            letter-spacing: 2px;
+        }
+
+        .liushisigua-particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .liushisigua-particle {
+            position: absolute;
+            background: rgba(255, 235, 59, 0.4);
+            border-radius: 50%;
+            animation: float-up 8s ease-in-out infinite;
+        }
+
+        @keyframes float-up {
+            0% {
+                transform: translateY(100vh) scale(0);
+                opacity: 0;
+            }
+            20% {
+                opacity: 0.8;
+            }
+            80% {
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(-100px) scale(1);
+                opacity: 0;
+            }
+        }
+
+        .transition-overlay {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, transparent 0%, rgba(0, 0, 0, 0.8) 70%, #000 100%);
+            z-index: 3;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .nav-btns {
+            position: absolute;
+            bottom: 5%;
+            display: flex;
+            gap: 20px;
+            z-index: 10;
+            opacity: 0;
+        }
+
+        .nav-btn {
+            padding: 12px 30px;
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.8);
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .nav-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.5);
+            color: rgba(255, 255, 255, 1);
+        }
+    </style>
+</head>
+<body>
+    <div class="scene" id="scene">
+        <div class="chaos-particles" id="chaosParticles"></div>
+        
+        <div class="text-container">
+            <div class="phase-text" id="phaseText">混沌之初 无极初现</div>
+        </div>
+
+        <div class="wuji-container" id="wujiContainer">
+            <div class="accretion-disk-outer"></div>
+            <div class="accretion-disk"></div>
+            <div class="blackhole" id="blackhole"></div>
+        </div>
+
+        <div class="taiji-container" id="taijiContainer">
+            <div class="taiji" id="taiji">
+                <div class="yin-yang"></div>
+                <div class="dot dot-white"></div>
+                <div class="dot dot-black"></div>
+            </div>
+        </div>
+
+        <div class="liangyi-container" id="liangyiContainer">
+            <div class="sun-moon-wrapper">
+                <div class="label label-sun">太阳</div>
+                <div class="sun" id="sun"></div>
+                <div class="yao-container yang-yao-container">
+                    <div class="yao yang-yao"></div>
+                </div>
+                
+                <div class="yao-container yin-yao-container">
+                    <div class="yao yin-yao"></div>
+                </div>
+                <div class="moon" id="moon"></div>
+                <div class="label label-moon">太阴</div>
+            </div>
+        </div>
+
+        <div class="sixiang-container" id="sixiangContainer">
+            <div class="sixiang-wrapper">
+                <div class="xiang xiang-taiyang">
+                    <div class="xiang-name">太阳</div>
+                    <div class="xiang-yaos">
+                        <div class="xiang-yao yang"></div>
+                        <div class="xiang-yao yang"></div>
+                    </div>
+                </div>
+                
+                <div class="xiang xiang-shaoyang">
+                    <div class="xiang-name">少阳</div>
+                    <div class="xiang-yaos">
+                        <div class="xiang-yao yang"></div>
+                        <div class="xiang-yao yin"></div>
+                    </div>
+                </div>
+                
+                <div class="xiang xiang-taiyin">
+                    <div class="xiang-name">太阴</div>
+                    <div class="xiang-yaos">
+                        <div class="xiang-yao yin"></div>
+                        <div class="xiang-yao yin"></div>
+                    </div>
+                </div>
+                
+                <div class="xiang xiang-shaoyin">
+                    <div class="xiang-name">少阴</div>
+                    <div class="xiang-yaos">
+                        <div class="xiang-yao yin"></div>
+                        <div class="xiang-yao yang"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="bagua-container" id="baguaContainer">
+            <div class="bagua-wrapper">
+                <div class="trigram qian">
+                    <div class="trigram-name">乾</div>
+                    <div class="trigram-yaos">
+                        <div class="trigram-yao yang"></div>
+                        <div class="trigram-yao yang"></div>
+                        <div class="trigram-yao yang"></div>
+                    </div>
+                </div>
+                
+                <div class="trigram dui">
+                    <div class="trigram-name">兑</div>
+                    <div class="trigram-yaos">
+                        <div class="trigram-yao yin"></div>
+                        <div class="trigram-yao yang"></div>
+                        <div class="trigram-yao yang"></div>
+                    </div>
+                </div>
+                
+                <div class="trigram li">
+                    <div class="trigram-name">离</div>
+                    <div class="trigram-yaos">
+                        <div class="trigram-yao yang"></div>
+                        <div class="trigram-yao yin"></div>
+                        <div class="trigram-yao yang"></div>
+                    </div>
+                </div>
+                
+                <div class="trigram zhen">
+                    <div class="trigram-name">震</div>
+                    <div class="trigram-yaos">
+                        <div class="trigram-yao yin"></div>
+                        <div class="trigram-yao yin"></div>
+                        <div class="trigram-yao yang"></div>
+                    </div>
+                </div>
+                
+                <div class="trigram kun">
+                    <div class="trigram-name">坤</div>
+                    <div class="trigram-yaos">
+                        <div class="trigram-yao yin"></div>
+                        <div class="trigram-yao yin"></div>
+                        <div class="trigram-yao yin"></div>
+                    </div>
+                </div>
+                
+                <div class="trigram gen">
+                    <div class="trigram-name">艮</div>
+                    <div class="trigram-yaos">
+                        <div class="trigram-yao yang"></div>
+                        <div class="trigram-yao yin"></div>
+                        <div class="trigram-yao yin"></div>
+                    </div>
+                </div>
+                
+                <div class="trigram kan">
+                    <div class="trigram-name">坎</div>
+                    <div class="trigram-yaos">
+                        <div class="trigram-yao yin"></div>
+                        <div class="trigram-yao yang"></div>
+                        <div class="trigram-yao yin"></div>
+                    </div>
+                </div>
+                
+                <div class="trigram xun">
+                    <div class="trigram-name">巽</div>
+                    <div class="trigram-yaos">
+                        <div class="trigram-yao yang"></div>
+                        <div class="trigram-yao yang"></div>
+                        <div class="trigram-yao yin"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="liushisigua-container" id="liushisiguaContainer">
+            <div class="liushisigua-particles" id="liushisiguaParticles"></div>
+            <div class="liushisigua-grid" id="liushisiguaGrid"></div>
+        </div>
+
+        <div class="transition-overlay" id="transitionOverlay"></div>
+
+        <div class="nav-btns" id="navBtns">
+            <button class="nav-btn" onclick="goToTaiji()">查看八卦</button>
+            <button class="nav-btn" onclick="restartAnimation()">重新体验</button>
+        </div>
+    </div>
+
+    <script>
+        const guaguaList = [
+            { name: '乾', yaos: ['yang', 'yang', 'yang', 'yang', 'yang', 'yang'] },
+            { name: '坤', yaos: ['yin', 'yin', 'yin', 'yin', 'yin', 'yin'] },
+            { name: '屯', yaos: ['yin', 'yin', 'yang', 'yin', 'yang', 'yin'] },
+            { name: '蒙', yaos: ['yin', 'yang', 'yin', 'yin', 'yang', 'yin'] },
+            { name: '需', yaos: ['yang', 'yang', 'yang', 'yang', 'yin', 'yang'] },
+            { name: '讼', yaos: ['yin', 'yang', 'yin', 'yang', 'yang', 'yang'] },
+            { name: '师', yaos: ['yin', 'yin', 'yin', 'yin', 'yang', 'yin'] },
+            { name: '比', yaos: ['yin', 'yang', 'yin', 'yin', 'yin', 'yin'] },
+            { name: '小畜', yaos: ['yang', 'yang', 'yang', 'yang', 'yang', 'yin'] },
+            { name: '履', yaos: ['yin', 'yang', 'yang', 'yang', 'yang', 'yang'] },
+            { name: '泰', yaos: ['yin', 'yin', 'yin', 'yang', 'yang', 'yang'] },
+            { name: '否', yaos: ['yang', 'yang', 'yang', 'yin', 'yin', 'yin'] },
+            { name: '同人', yaos: ['yang', 'yang', 'yang', 'yin', 'yang', 'yang'] },
+            { name: '大有', yaos: ['yang', 'yang', 'yin', 'yang', 'yang', 'yang'] },
+            { name: '谦', yaos: ['yin', 'yin', 'yin', 'yang', 'yin', 'yin'] },
+            { name: '豫', yaos: ['yin', 'yin', 'yang', 'yin', 'yin', 'yin'] },
+            { name: '随', yaos: ['yin', 'yang', 'yin', 'yin', 'yang', 'yang'] },
+            { name: '蛊', yaos: ['yang', 'yang', 'yin', 'yin', 'yang', 'yin'] },
+            { name: '临', yaos: ['yin', 'yin', 'yin', 'yin', 'yang', 'yang'] },
+            { name: '观', yaos: ['yang', 'yang', 'yin', 'yin', 'yin', 'yin'] },
+            { name: '噬嗑', yaos: ['yin', 'yang', 'yin', 'yin', 'yang', 'yang'] },
+            { name: '贲', yaos: ['yang', 'yang', 'yin', 'yin', 'yang', 'yin'] },
+            { name: '剥', yaos: ['yin', 'yin', 'yin', 'yin', 'yin', 'yang'] },
+            { name: '复', yaos: ['yang', 'yin', 'yin', 'yin', 'yin', 'yin'] },
+            { name: '无妄', yaos: ['yang', 'yang', 'yang', 'yin', 'yang', 'yin'] },
+            { name: '大畜', yaos: ['yang', 'yin', 'yin', 'yang', 'yang', 'yang'] },
+            { name: '颐', yaos: ['yang', 'yin', 'yin', 'yin', 'yin', 'yang'] },
+            { name: '大过', yaos: ['yin', 'yang', 'yang', 'yang', 'yang', 'yin'] },
+            { name: '坎', yaos: ['yin', 'yang', 'yin', 'yin', 'yang', 'yin'] },
+            { name: '离', yaos: ['yang', 'yin', 'yang', 'yang', 'yin', 'yang'] },
+            { name: '咸', yaos: ['yin', 'yang', 'yin', 'yang', 'yang', 'yin'] },
+            { name: '恒', yaos: ['yin', 'yang', 'yang', 'yang', 'yin', 'yin'] },
+            { name: '遁', yaos: ['yang', 'yang', 'yang', 'yang', 'yin', 'yin'] },
+            { name: '大壮', yaos: ['yin', 'yin', 'yang', 'yang', 'yang', 'yang'] },
+            { name: '晋', yaos: ['yin', 'yin', 'yin', 'yang', 'yin', 'yang'] },
+            { name: '明夷', yaos: ['yang', 'yin', 'yang', 'yin', 'yin', 'yin'] },
+            { name: '家人', yaos: ['yang', 'yang', 'yin', 'yang', 'yin', 'yang'] },
+            { name: '睽', yaos: ['yang', 'yin', 'yang', 'yin', 'yang', 'yang'] },
+            { name: '蹇', yaos: ['yin', 'yang', 'yin', 'yin', 'yin', 'yang'] },
+            { name: '解', yaos: ['yang', 'yin', 'yin', 'yin', 'yang', 'yin'] },
+            { name: '损', yaos: ['yang', 'yin', 'yin', 'yang', 'yang', 'yin'] },
+            { name: '益', yaos: ['yin', 'yang', 'yang', 'yang', 'yin', 'yang'] },
+            { name: '夬', yaos: ['yin', 'yang', 'yang', 'yang', 'yang', 'yang'] },
+            { name: '姤', yaos: ['yang', 'yang', 'yang', 'yang', 'yang', 'yin'] },
+            { name: '萃', yaos: ['yin', 'yin', 'yin', 'yin', 'yang', 'yang'] },
+            { name: '升', yaos: ['yang', 'yang', 'yin', 'yin', 'yin', 'yin'] },
+            { name: '困', yaos: ['yin', 'yang', 'yin', 'yin', 'yang', 'yang'] },
+            { name: '井', yaos: ['yang', 'yin', 'yin', 'yin', 'yang', 'yin'] },
+            { name: '革', yaos: ['yin', 'yang', 'yang', 'yin', 'yang', 'yang'] },
+            { name: '鼎', yaos: ['yang', 'yin', 'yang', 'yang', 'yang', 'yin'] },
+            { name: '震', yaos: ['yin', 'yin', 'yang', 'yin', 'yin', 'yang'] },
+            { name: '艮', yaos: ['yang', 'yin', 'yin', 'yang', 'yin', 'yin'] },
+            { name: '渐', yaos: ['yang', 'yin', 'yin', 'yang', 'yang', 'yin'] },
+            { name: '归妹', yaos: ['yin', 'yang', 'yang', 'yin', 'yin', 'yang'] },
+            { name: '丰', yaos: ['yin', 'yin', 'yang', 'yang', 'yin', 'yang'] },
+            { name: '旅', yaos: ['yang', 'yin', 'yang', 'yin', 'yin', 'yang'] },
+            { name: '巽', yaos: ['yang', 'yang', 'yin', 'yang', 'yang', 'yin'] },
+            { name: '兑', yaos: ['yin', 'yang', 'yang', 'yin', 'yang', 'yang'] },
+            { name: '涣', yaos: ['yang', 'yang', 'yin', 'yin', 'yang', 'yin'] },
+            { name: '节', yaos: ['yin', 'yang', 'yin', 'yang', 'yang', 'yang'] },
+            { name: '中孚', yaos: ['yang', 'yang', 'yin', 'yin', 'yang', 'yang'] },
+            { name: '小过', yaos: ['yin', 'yin', 'yang', 'yang', 'yin', 'yin'] },
+            { name: '既济', yaos: ['yin', 'yang', 'yin', 'yang', 'yin', 'yang'] },
+            { name: '未济', yaos: ['yang', 'yin', 'yang', 'yin', 'yang', 'yin'] }
+        ];
+
+        function createChaosParticles() {
+            const container = document.getElementById('chaosParticles');
+            for (let i = 0; i < 100; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'chaos-particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.width = Math.random() * 3 + 1 + 'px';
+                particle.style.height = particle.style.width;
+                particle.style.animationDelay = Math.random() * 8 + 's';
+                particle.style.animationDuration = (Math.random() * 6 + 6) + 's';
+                container.appendChild(particle);
+            }
+        }
+
+        function createLiushisiguaParticles() {
+            const container = document.getElementById('liushisiguaParticles');
+            for (let i = 0; i < 150; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'liushisigua-particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 8 + 's';
+                particle.style.animationDuration = (Math.random() * 6 + 6) + 's';
+                particle.style.width = Math.random() * 4 + 2 + 'px';
+                particle.style.height = particle.style.width;
+                container.appendChild(particle);
+            }
+        }
+
+        function createLiushisiguaGrid() {
+            const grid = document.getElementById('liushisiguaGrid');
+            guaguaList.forEach((guagua, index) => {
+                const item = document.createElement('div');
+                item.className = 'guagua-item';
+                
+                const yaosDiv = document.createElement('div');
+                yaosDiv.className = 'guagua-yaos';
+                
+                guagua.yaos.forEach(yao => {
+                    const yaoDiv = document.createElement('div');
+                    yaoDiv.className = 'guagua-yao ' + yao;
+                    yaosDiv.appendChild(yaoDiv);
+                });
+                
+                const nameDiv = document.createElement('div');
+                nameDiv.className = 'guagua-name';
+                nameDiv.textContent = guagua.name;
+                
+                item.appendChild(yaosDiv);
+                item.appendChild(nameDiv);
+                grid.appendChild(item);
+            });
+        }
+
+        function updatePhaseText(text, delay = 0) {
+            setTimeout(() => {
+                const phaseText = document.getElementById('phaseText');
+                phaseText.style.animation = 'none';
+                phaseText.offsetHeight;
+                phaseText.style.opacity = '0';
+                phaseText.textContent = text;
+                phaseText.style.animation = 'text-fade 1.5s ease-out forwards';
+            }, delay);
+        }
+
+        function transitionContainers(outContainer, inContainer, callback) {
+            const transitionOverlay = document.getElementById('transitionOverlay');
+            
+            transitionOverlay.style.animation = 'text-fade 0.8s ease-out forwards';
+
+            setTimeout(() => {
+                if (outContainer) {
+                    outContainer.style.display = 'none';
+                }
+                
+                if (inContainer) {
+                    inContainer.style.opacity = '0';
+                    inContainer.style.transform = 'scale(0.5)';
+                    inContainer.style.transition = 'all 1s ease-out';
+                    inContainer.style.display = 'flex';
+
+                    setTimeout(() => {
+                        inContainer.style.opacity = '1';
+                        inContainer.style.transform = 'scale(1)';
+                    }, 50);
+                }
+
+                transitionOverlay.style.opacity = '0';
+
+                if (callback) {
+                    setTimeout(callback, 500);
+                }
+            }, 800);
+        }
+
+        function startAnimation() {
+            setTimeout(() => {
+                updatePhaseText('无极生太极');
+                transitionContainers(
+                    document.getElementById('wujiContainer'),
+                    document.getElementById('taijiContainer'),
+                    () => {
+                        const taiji = document.getElementById('taiji');
+                        taiji.style.animation = 'rotate-reverse 8s linear infinite';
+                    }
+                );
+            }, 5000);
+
+            setTimeout(() => {
+                updatePhaseText('太极生两仪');
+                transitionContainers(
+                    document.getElementById('taijiContainer'),
+                    document.getElementById('liangyiContainer')
+                );
+            }, 8000);
+
+            setTimeout(() => {
+                updatePhaseText('两仪生四象');
+                transitionContainers(
+                    document.getElementById('liangyiContainer'),
+                    document.getElementById('sixiangContainer')
+                );
+            }, 11000);
+
+            setTimeout(() => {
+                updatePhaseText('四象生八卦');
+                transitionContainers(
+                    document.getElementById('sixiangContainer'),
+                    document.getElementById('baguaContainer')
+                );
+            }, 14000);
+
+            setTimeout(() => {
+                updatePhaseText('八卦生六十四卦');
+                transitionContainers(
+                    document.getElementById('baguaContainer'),
+                    document.getElementById('liushisiguaContainer'),
+                    () => {
+                        createLiushisiguaParticles();
+                        createLiushisiguaGrid();
+                        setTimeout(() => {
+                            updatePhaseText('八经卦一重叠来到了人间 统摄一切事物');
+                            const navBtns = document.getElementById('navBtns');
+                            navBtns.style.opacity = '0';
+                            navBtns.style.transition = 'opacity 1s ease-out';
+                            navBtns.style.display = 'flex';
+                            setTimeout(() => {
+                                navBtns.style.opacity = '1';
+                            }, 100);
+                        }, 1000);
+                    }
+                );
+            }, 17000);
+        }
+
+        function goToTaiji() {
+            window.location.href = 'taiji.html';
+        }
+
+        function restartAnimation() {
+            location.reload();
+        }
+
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes rotate-reverse {
+                from {
+                    transform: rotate(360deg);
+                }
+                to {
+                    transform: rotate(0deg);
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        createChaosParticles();
+        startAnimation();
+    </script>
+</body>
+</html>
