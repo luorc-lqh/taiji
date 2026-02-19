@@ -171,33 +171,7 @@
             z-index: 0;
         }
 
-        .white-ring {
-            position: absolute;
-            width: 380px;
-            height: 380px;
-            border-radius: 50%;
-            border: 2px solid rgba(255, 255, 255, 0.4);
-            box-shadow: 
-                0 0 25px rgba(255, 255, 255, 0.3),
-                inset 0 0 25px rgba(255, 255, 255, 0.15);
-            z-index: 1;
-            animation: ring-pulse 3s ease-in-out infinite;
-        }
 
-        @keyframes ring-pulse {
-            0%, 100% {
-                border-color: rgba(255, 255, 255, 0.4);
-                box-shadow: 
-                    0 0 25px rgba(255, 255, 255, 0.3),
-                    inset 0 0 25px rgba(255, 255, 255, 0.15);
-            }
-            50% {
-                border-color: rgba(255, 255, 255, 0.6);
-                box-shadow: 
-                    0 0 45px rgba(255, 255, 255, 0.4),
-                    inset 0 0 35px rgba(255, 255, 255, 0.2);
-            }
-        }
 
         @keyframes disk-spin-reverse {
             from {
@@ -858,11 +832,6 @@
                 height: 300px;
             }
 
-            .white-ring {
-                width: 220px;
-                height: 220px;
-            }
-
             .taiji {
                 width: 200px;
                 height: 200px;
@@ -1036,11 +1005,6 @@
             .taiji-container {
                 width: 250px;
                 height: 250px;
-            }
-
-            .white-ring {
-                width: 180px;
-                height: 180px;
             }
 
             .taiji {
@@ -1281,7 +1245,6 @@
         </div>
 
         <div class="wuji-container" id="wujiContainer">
-            <div class="white-ring"></div>
             <div class="accretion-disk-outer"></div>
             <div class="accretion-disk"></div>
             <div class="blackhole" id="blackhole"></div>
@@ -1440,68 +1403,68 @@
         const guaguaList = [
             { name: '乾', yaos: ['yang', 'yang', 'yang', 'yang', 'yang', 'yang'] },
             { name: '坤', yaos: ['yin', 'yin', 'yin', 'yin', 'yin', 'yin'] },
-            { name: '屯', yaos: ['yin', 'yin', 'yang', 'yin', 'yang', 'yin'] },
-            { name: '蒙', yaos: ['yin', 'yang', 'yin', 'yin', 'yang', 'yin'] },
-            { name: '需', yaos: ['yang', 'yang', 'yang', 'yang', 'yin', 'yang'] },
-            { name: '讼', yaos: ['yin', 'yang', 'yin', 'yang', 'yang', 'yang'] },
-            { name: '师', yaos: ['yin', 'yin', 'yin', 'yin', 'yang', 'yin'] },
-            { name: '比', yaos: ['yin', 'yang', 'yin', 'yin', 'yin', 'yin'] },
-            { name: '小畜', yaos: ['yang', 'yang', 'yang', 'yang', 'yang', 'yin'] },
-            { name: '履', yaos: ['yin', 'yang', 'yang', 'yang', 'yang', 'yang'] },
+            { name: '屯', yaos: ['yin', 'yang', 'yin', 'yin', 'yin', 'yang'] },
+            { name: '蒙', yaos: ['yang', 'yin', 'yin', 'yin', 'yang', 'yin'] },
+            { name: '需', yaos: ['yang', 'yin', 'yang', 'yang', 'yang', 'yang'] },
+            { name: '讼', yaos: ['yang', 'yang', 'yang', 'yin', 'yang', 'yin'] },
+            { name: '师', yaos: ['yin', 'yang', 'yin', 'yin', 'yin', 'yin'] },
+            { name: '比', yaos: ['yin', 'yin', 'yin', 'yin', 'yang', 'yin'] },
+            { name: '小畜', yaos: ['yin', 'yang', 'yang', 'yang', 'yang', 'yang'] },
+            { name: '履', yaos: ['yang', 'yang', 'yang', 'yang', 'yang', 'yin'] },
             { name: '泰', yaos: ['yin', 'yin', 'yin', 'yang', 'yang', 'yang'] },
             { name: '否', yaos: ['yang', 'yang', 'yang', 'yin', 'yin', 'yin'] },
-            { name: '同人', yaos: ['yang', 'yang', 'yang', 'yin', 'yang', 'yang'] },
-            { name: '大有', yaos: ['yang', 'yang', 'yin', 'yang', 'yang', 'yang'] },
-            { name: '谦', yaos: ['yin', 'yin', 'yin', 'yang', 'yin', 'yin'] },
-            { name: '豫', yaos: ['yin', 'yin', 'yang', 'yin', 'yin', 'yin'] },
-            { name: '随', yaos: ['yin', 'yang', 'yin', 'yin', 'yang', 'yang'] },
-            { name: '蛊', yaos: ['yang', 'yang', 'yin', 'yin', 'yang', 'yin'] },
-            { name: '临', yaos: ['yin', 'yin', 'yin', 'yin', 'yang', 'yang'] },
-            { name: '观', yaos: ['yang', 'yang', 'yin', 'yin', 'yin', 'yin'] },
-            { name: '噬嗑', yaos: ['yin', 'yang', 'yin', 'yin', 'yang', 'yang'] },
-            { name: '贲', yaos: ['yang', 'yang', 'yin', 'yin', 'yang', 'yin'] },
-            { name: '剥', yaos: ['yin', 'yin', 'yin', 'yin', 'yin', 'yang'] },
-            { name: '复', yaos: ['yang', 'yin', 'yin', 'yin', 'yin', 'yin'] },
-            { name: '无妄', yaos: ['yang', 'yang', 'yang', 'yin', 'yang', 'yin'] },
-            { name: '大畜', yaos: ['yang', 'yin', 'yin', 'yang', 'yang', 'yang'] },
+            { name: '同人', yaos: ['yang', 'yin', 'yang', 'yang', 'yang', 'yang'] },
+            { name: '大有', yaos: ['yang', 'yang', 'yang', 'yang', 'yin', 'yang'] },
+            { name: '谦', yaos: ['yin', 'yin', 'yin', 'yin', 'yang', 'yin'] },
+            { name: '豫', yaos: ['yin', 'yin', 'yin', 'yin', 'yin', 'yang'] },
+            { name: '随', yaos: ['yang', 'yin', 'yin', 'yin', 'yang', 'yang'] },
+            { name: '蛊', yaos: ['yang', 'yin', 'yin', 'yin', 'yang', 'yang'] },
+            { name: '临', yaos: ['yang', 'yang', 'yin', 'yin', 'yin', 'yin'] },
+            { name: '观', yaos: ['yin', 'yin', 'yin', 'yin', 'yang', 'yang'] },
+            { name: '噬嗑', yaos: ['yang', 'yin', 'yang', 'yin', 'yang', 'yin'] },
+            { name: '贲', yaos: ['yin', 'yang', 'yin', 'yin', 'yang', 'yang'] },
+            { name: '剥', yaos: ['yang', 'yin', 'yin', 'yin', 'yin', 'yin'] },
+            { name: '复', yaos: ['yin', 'yin', 'yin', 'yin', 'yin', 'yang'] },
+            { name: '无妄', yaos: ['yin', 'yang', 'yin', 'yang', 'yang', 'yang'] },
+            { name: '大畜', yaos: ['yang', 'yang', 'yang', 'yin', 'yin', 'yang'] },
             { name: '颐', yaos: ['yang', 'yin', 'yin', 'yin', 'yin', 'yang'] },
             { name: '大过', yaos: ['yin', 'yang', 'yang', 'yang', 'yang', 'yin'] },
             { name: '坎', yaos: ['yin', 'yang', 'yin', 'yin', 'yang', 'yin'] },
             { name: '离', yaos: ['yang', 'yin', 'yang', 'yang', 'yin', 'yang'] },
-            { name: '咸', yaos: ['yin', 'yang', 'yin', 'yang', 'yang', 'yin'] },
-            { name: '恒', yaos: ['yin', 'yang', 'yang', 'yang', 'yin', 'yin'] },
-            { name: '遁', yaos: ['yang', 'yang', 'yang', 'yang', 'yin', 'yin'] },
-            { name: '大壮', yaos: ['yin', 'yin', 'yang', 'yang', 'yang', 'yang'] },
-            { name: '晋', yaos: ['yin', 'yin', 'yin', 'yang', 'yin', 'yang'] },
-            { name: '明夷', yaos: ['yang', 'yin', 'yang', 'yin', 'yin', 'yin'] },
-            { name: '家人', yaos: ['yang', 'yang', 'yin', 'yang', 'yin', 'yang'] },
-            { name: '睽', yaos: ['yang', 'yin', 'yang', 'yin', 'yang', 'yang'] },
-            { name: '蹇', yaos: ['yin', 'yang', 'yin', 'yin', 'yin', 'yang'] },
-            { name: '解', yaos: ['yang', 'yin', 'yin', 'yin', 'yang', 'yin'] },
-            { name: '损', yaos: ['yang', 'yin', 'yin', 'yang', 'yang', 'yin'] },
-            { name: '益', yaos: ['yin', 'yang', 'yang', 'yang', 'yin', 'yang'] },
-            { name: '夬', yaos: ['yin', 'yang', 'yang', 'yang', 'yang', 'yang'] },
-            { name: '姤', yaos: ['yang', 'yang', 'yang', 'yang', 'yang', 'yin'] },
-            { name: '萃', yaos: ['yin', 'yin', 'yin', 'yin', 'yang', 'yang'] },
-            { name: '升', yaos: ['yang', 'yang', 'yin', 'yin', 'yin', 'yin'] },
-            { name: '困', yaos: ['yin', 'yang', 'yin', 'yin', 'yang', 'yang'] },
-            { name: '井', yaos: ['yang', 'yin', 'yin', 'yin', 'yang', 'yin'] },
-            { name: '革', yaos: ['yin', 'yang', 'yang', 'yin', 'yang', 'yang'] },
-            { name: '鼎', yaos: ['yang', 'yin', 'yang', 'yang', 'yang', 'yin'] },
+            { name: '咸', yaos: ['yin', 'yang', 'yang', 'yin', 'yang', 'yin'] },
+            { name: '恒', yaos: ['yin', 'yin', 'yang', 'yang', 'yang', 'yin'] },
+            { name: '遁', yaos: ['yin', 'yin', 'yang', 'yang', 'yang', 'yang'] },
+            { name: '大壮', yaos: ['yang', 'yang', 'yang', 'yang', 'yin', 'yin'] },
+            { name: '晋', yaos: ['yang', 'yin', 'yang', 'yin', 'yin', 'yin'] },
+            { name: '明夷', yaos: ['yin', 'yin', 'yin', 'yang', 'yin', 'yang'] },
+            { name: '家人', yaos: ['yang', 'yin', 'yang', 'yin', 'yang', 'yang'] },
+            { name: '睽', yaos: ['yang', 'yang', 'yin', 'yang', 'yin', 'yang'] },
+            { name: '蹇', yaos: ['yang', 'yin', 'yin', 'yin', 'yang', 'yin'] },
+            { name: '解', yaos: ['yin', 'yang', 'yin', 'yin', 'yin', 'yang'] },
+            { name: '损', yaos: ['yin', 'yang', 'yang', 'yin', 'yin', 'yang'] },
+            { name: '益', yaos: ['yang', 'yin', 'yin', 'yang', 'yang', 'yin'] },
+            { name: '夬', yaos: ['yang', 'yang', 'yang', 'yang', 'yang', 'yin'] },
+            { name: '姤', yaos: ['yin', 'yang', 'yang', 'yang', 'yang', 'yang'] },
+            { name: '萃', yaos: ['yang', 'yang', 'yin', 'yin', 'yin', 'yin'] },
+            { name: '升', yaos: ['yin', 'yin', 'yin', 'yin', 'yang', 'yang'] },
+            { name: '困', yaos: ['yang', 'yin', 'yin', 'yin', 'yang', 'yin'] },
+            { name: '井', yaos: ['yin', 'yang', 'yin', 'yin', 'yin', 'yang'] },
+            { name: '革', yaos: ['yang', 'yang', 'yin', 'yang', 'yang', 'yin'] },
+            { name: '鼎', yaos: ['yin', 'yang', 'yang', 'yang', 'yin', 'yang'] },
             { name: '震', yaos: ['yin', 'yin', 'yang', 'yin', 'yin', 'yang'] },
-            { name: '艮', yaos: ['yang', 'yin', 'yin', 'yang', 'yin', 'yin'] },
-            { name: '渐', yaos: ['yang', 'yin', 'yin', 'yang', 'yang', 'yin'] },
-            { name: '归妹', yaos: ['yin', 'yang', 'yang', 'yin', 'yin', 'yang'] },
+            { name: '艮', yaos: ['yang', 'yin', 'yin', 'yin', 'yin', 'yang'] },
+            { name: '渐', yaos: ['yin', 'yang', 'yang', 'yin', 'yin', 'yang'] },
+            { name: '归妹', yaos: ['yang', 'yin', 'yin', 'yang', 'yang', 'yin'] },
             { name: '丰', yaos: ['yin', 'yin', 'yang', 'yang', 'yin', 'yang'] },
             { name: '旅', yaos: ['yang', 'yin', 'yang', 'yin', 'yin', 'yang'] },
-            { name: '巽', yaos: ['yang', 'yang', 'yin', 'yang', 'yang', 'yin'] },
-            { name: '兑', yaos: ['yin', 'yang', 'yang', 'yin', 'yang', 'yang'] },
-            { name: '涣', yaos: ['yang', 'yang', 'yin', 'yin', 'yang', 'yin'] },
-            { name: '节', yaos: ['yin', 'yang', 'yin', 'yang', 'yang', 'yang'] },
+            { name: '巽', yaos: ['yin', 'yang', 'yang', 'yin', 'yang', 'yang'] },
+            { name: '兑', yaos: ['yang', 'yang', 'yin', 'yang', 'yang', 'yin'] },
+            { name: '涣', yaos: ['yin', 'yang', 'yin', 'yin', 'yang', 'yang'] },
+            { name: '节', yaos: ['yang', 'yang', 'yin', 'yin', 'yang', 'yin'] },
             { name: '中孚', yaos: ['yang', 'yang', 'yin', 'yin', 'yang', 'yang'] },
             { name: '小过', yaos: ['yin', 'yin', 'yang', 'yang', 'yin', 'yin'] },
-            { name: '既济', yaos: ['yin', 'yang', 'yin', 'yang', 'yin', 'yang'] },
-            { name: '未济', yaos: ['yang', 'yin', 'yang', 'yin', 'yang', 'yin'] }
+            { name: '既济', yaos: ['yang', 'yin', 'yang', 'yin', 'yang', 'yin'] },
+            { name: '未济', yaos: ['yin', 'yang', 'yin', 'yang', 'yin', 'yang'] }
         ];
 
         function createChaosParticles() {
@@ -1610,7 +1573,7 @@
                         taiji.style.animation = 'rotate-reverse 8s linear infinite';
                     }
                 );
-            }, 7000);
+            }, 5000);
 
             setTimeout(() => {
                 updatePhaseText('太极生两仪');
@@ -1618,7 +1581,7 @@
                     document.getElementById('taijiContainer'),
                     document.getElementById('liangyiContainer')
                 );
-            }, 10000);
+            }, 8000);
 
             setTimeout(() => {
                 updatePhaseText('两仪生四象');
@@ -1626,7 +1589,7 @@
                     document.getElementById('liangyiContainer'),
                     document.getElementById('sixiangContainer')
                 );
-            }, 13000);
+            }, 11000);
 
             setTimeout(() => {
                 updatePhaseText('四象生八卦');
@@ -1634,7 +1597,7 @@
                     document.getElementById('sixiangContainer'),
                     document.getElementById('baguaContainer')
                 );
-            }, 16000);
+            }, 14000);
 
             setTimeout(() => {
                 updatePhaseText('八卦生六十四卦');
@@ -1656,7 +1619,7 @@
                         }, 1000);
                     }
                 );
-            }, 19000);
+            }, 17000);
         }
 
         function goToTaiji() {
